@@ -44,3 +44,45 @@ Troubleshooting
 Script doesn't start: Ensure that VBS scripts are allowed on your system and that you have the necessary administrator rights.
 Time format errors: Make sure to follow the HH:MM format and that the time is at least 5 minutes in the future.
 This user manual will help you set up and effectively use the popup reminder program to remind you of important scheduled events.
+
+FR:
+
+Description
+
+Ce script VBS (Visual Basic Script) permet à l'utilisateur de définir une alerte programmée à une heure spécifique. Lorsque l'heure approche, une notification est affichée pour rappeler l'utilisateur. Le programme vérifie également si plusieurs instances du même script sont en cours d'exécution et, dans ce cas, ferme les instances supplémentaires.
+
+
+Prérequis
+
+Windows OS avec support pour exécuter des scripts VBS.
+Accès à l'éditeur de script ou à l'invite de commande pour exécuter le fichier.
+Installation et Démarrage
+Copiez le code dans un fichier texte.
+Enregistrez le fichier avec l'extension .vbs, par exemple Fab_Alerte.vbs.
+Double-cliquez sur le fichier pour lancer le script, ou exécutez-le via l'invite de commande avec wscript Fab_Alerte.vbs.
+
+
+Utilisation
+
+Définir l'Heure d'Alerte :
+Au démarrage, une boîte de dialogue s'ouvre pour vous demander d'entrer l'heure de l'alerte au format HH:MM.
+Un exemple basé sur l'heure actuelle plus 6 minutes est affiché pour aider à formuler l'heure correctement.
+Si le format de l'heure est incorrect ou si l'heure est trop proche (moins de 5 minutes dans le futur), un message d'erreur sera affiché et vous serez invité à réessayer.
+Notification d'Alerte :
+Une fois une heure valide saisie, une notification préventive s'affichera 5 minutes avant l'heure d'alerte programmée.
+Un rappel final s'affiche exactement à l'heure programmée.
+Répétition :
+Après l'alerte, le programme invite l'utilisateur à définir une nouvelle heure pour la prochaine alerte.
+
+
+Fonctions Spéciales
+
+CheckIfRunning : Vérifie si plusieurs instances du script sont en cours d'exécution. Si c'est le cas, les instances supplémentaires seront fermées pour éviter les doublons.
+CustomSleep : Une fonction personnalisée pour mettre le script en pause tout en vérifiant périodiquement si le script doit être terminé prématurément.
+Sortir : Ferme le script avec un message si plusieurs instances sont détectées.
+
+
+Dépannage
+
+Script ne démarre pas : Vérifiez si les scripts VBS sont autorisés sur votre système et si vous avez les droits d'administrateur nécessaires.
+Erreurs de format d'heure : Assurez-vous de suivre le format HH:MM et que l'heure est au moins 5 minutes dans le futur.
