@@ -17,7 +17,7 @@ Double-click the file to launch the script or run it via command prompt with wsc
 
 Usage
 
-Setting the Alert Time:
+Setting the Alert Time (voice):
 Upon startup, a dialog box will prompt you to enter the alert time in HH:MM format.
 An example based on the current time plus 6 minutes is displayed to help correctly formulate the time.
 If the time format is incorrect or the time is too close (less than 5 minutes in the future), an error message will be displayed and you will be prompted to retry.
@@ -64,7 +64,7 @@ Double-cliquez sur le fichier pour lancer le script, ou exécutez-le via l'invit
 
 Utilisation
 
-Définir l'Heure d'Alerte :
+Définir l'Heure d'Alerte (vocale):
 Au démarrage, une boîte de dialogue s'ouvre pour vous demander d'entrer l'heure de l'alerte au format HH:MM.
 Un exemple basé sur l'heure actuelle plus 6 minutes est affiché pour aider à formuler l'heure correctement.
 Si le format de l'heure est incorrect ou si l'heure est trop proche (moins de 5 minutes dans le futur), un message d'erreur sera affiché et vous serez invité à réessayer.
