@@ -69,7 +69,7 @@ Sub Main
         End If
         On Error GoTo 0
     Loop Until isTimeValid
-	nowAlertTime = DateAdd("n", -1, alertTime) ' Configurer l'alerte pour 5 minutes avant l'heure entrée
+	nowAlertTime = DateAdd("n", -1, alertTime) ' Configurer l'alerte pour 1 minutes avant l'heure entrée
     preAlertTime = DateAdd("n", -5, alertTime) ' Configurer l'alerte pour 5 minutes avant l'heure entrée
 
     Do While Now < nowAlertTime'alertTime
