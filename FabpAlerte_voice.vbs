@@ -9,10 +9,10 @@ Set message = CreateObject("SAPI.SpVoice")
 Set oShell = CreateObject("WScript.Shell")
 
 currentDate = FormatDateTime(Now, vbShortDate) ' Formate la date actuelle en format court.
-strProcessName = "wscript.exe"  ' ou "cscript.exe" selon l'interprÃ©teur utilisÃ©
+strProcessName = "wscript.exe"  ' ou "cscript.exe" selon l'interpréteur utilisé
 strComputer = "."
 
-' CrÃ©er une connexion au service WMI
+' Créer une connexion au service WMI
 Set objWMIService = GetObject("winmgmts:" & "{impersonationLevel=impersonate}!\\" & strComputer & "\root\cimv2")
 
 ' Appel de la fonction principale
@@ -31,10 +31,10 @@ Sub Main
 		message.Speak "Bien, annonce FabAlert : Veuillez entrer l'heure de l'alerte"
         userTimeInput = InputBox("Veuillez entrer l'heure de l'alerte (format HH:MM, par exemple " & exampleTime & ")", "Fab_Alerte")
         If userTimeInput = "" Then ' Si l'utilisateur annule la saisie
-			message.Speak "Bien, annonce FabAlert : Aucune heure entrÃ©e, le programme va s'arrÃªter."
-            'MsgBox "Aucune heure entrÃ©e, le programme va s'arrÃªter.", vbOKOnly + vbExclamation, "Fab_Alerte Programme TerminÃ©"
+			message.Speak "Bien, annonce FabAlert : Aucune heure entrée, le programme va s'arrêter."
+            'MsgBox "Aucune heure entrée, le programme va s'arrêter.", vbOKOnly + vbExclamation, "Fab_Alerte Programme Terminé"
 			'convert in temporary shell because of voice alerte, that is enouth
-			oShell.Popup "Aucune heure entrÃ©e, le programme va s'arrÃªter.", 5, "Fab_Alerte Programme TerminÃ©",  4096 +16
+			oShell.Popup "Aucune heure entrée, le programme va s'arrêter.", 5, "Fab_Alerte Programme Terminé",  4096 +16
 			
 
 
@@ -42,20 +42,20 @@ Sub Main
         End If
 
         On Error Resume Next
-        alertTime = CDate(currentDate & " " & userTimeInput & ":00") ' Ajouter les secondes pour complÃ©ter le format HH:MM:SS
+        alertTime = CDate(currentDate & " " & userTimeInput & ":00") ' Ajouter les secondes pour compléter le format HH:MM:SS
 		
         
 		
 		If Err.Number <> 0 Then
-		message.Speak "Bien, annonce FabAlert : Format d'heure invalide, veuillez rÃ©essayer."
-            'MsgBox "Format d'heure invalide, veuillez rÃ©essayer.", vbOKOnly + vbCritical, "Erreur"
-			oShell.Popup "Format d'heure invalide, veuillez rÃ©essayer." , 5, "Erreur",  4096 +16
+		message.Speak "Bien, annonce FabAlert : Format d'heure invalide, veuillez réessayer."
+            'MsgBox "Format d'heure invalide, veuillez réessayer.", vbOKOnly + vbCritical, "Erreur"
+			oShell.Popup "Format d'heure invalide, veuillez réessayer." , 5, "Erreur",  4096 +16
 			
             Err.Clear
         ElseIf Now > alertTime Or DateDiff("n", Now, alertTime) < 5 Then
-			message.Speak "Bien, annonce FabAlert : L'heure entrÃ©e doit Ãªtre au moins 5 minutes plus tard que l'heure actuelle."
-            'MsgBox "L'heure entrÃ©e doit Ãªtre au moins 5 minutes plus tard que l'heure actuelle.", vbOKOnly + vbExclamation, "Heure invalide"
-			oShell.Popup "L'heure entrÃ©e doit Ãªtre au moins 5 minutes plus tard que l'heure actuelle." , 5, "Heure invalide",  4096 +16
+			message.Speak "Bien, annonce FabAlert : L'heure entrée doit être au moins 5 minutes plus tard que l'heure actuelle."
+            'MsgBox "L'heure entrée doit être au moins 5 minutes plus tard que l'heure actuelle.", vbOKOnly + vbExclamation, "Heure invalide"
+			oShell.Popup "L'heure entrée doit être au moins 5 minutes plus tard que l'heure actuelle." , 5, "Heure invalide",  4096 +16
 		
 			
 			
@@ -69,8 +69,8 @@ Sub Main
         End If
         On Error GoTo 0
     Loop Until isTimeValid
-	nowAlertTime = DateAdd("n", -1, alertTime) ' Configurer l'alerte pour 1 minutes avant l'heure entrÃ©e
-    preAlertTime = DateAdd("n", -5, alertTime) ' Configurer l'alerte pour 5 minutes avant l'heure entrÃ©e
+	nowAlertTime = DateAdd("n", -1, alertTime) ' Configurer l'alerte pour 1 minutes avant l'heure entrée
+    preAlertTime = DateAdd("n", -5, alertTime) ' Configurer l'alerte pour 5 minutes avant l'heure entrée
 
     Do While Now < nowAlertTime'alertTime
         If Now >= preAlertTime Then
@@ -81,14 +81,14 @@ Sub Main
             'MsgBox "Ceci est un rappel! Il reste maintenant " & minutesRemaining & " minutes avant l'heure de votre alerte.", vbOKOnly + vbInformation, " Fab_Alerte Notification"
             oShell.Popup "Ceci est un rappel! Il reste maintenant " & minutesRemaining & " minutes avant l'heure de votre alerte.", 5, "Fab_Alerte",  4096 +16
 			
-			CustomSleep(60) ' Attendre 60 secondes avec vÃ©rification
+			CustomSleep(60) ' Attendre 60 secondes avec vérification
         Else
-            CustomSleep(30) ' VÃ©rifier toutes les 30 secondes
+            CustomSleep(30) ' Vérifier toutes les 30 secondes
         End If
     Loop
-		message.Speak "Bien, annonce FabAlert : L'heure de l'alerte est passÃ©e. Veuillez entrer une nouvelle heure pour la prochaine alerte"
-        'MsgBox "L'heure de l'alerte est passÃ©e. Veuillez entrer une nouvelle heure pour la prochaine alerte.", vbOKOnly + vbInformation, "Fab_Alerte Alerte TerminÃ©e"
-		oShell.Popup "L'heure de l'alerte est passÃ©e. Veuillez entrer une nouvelle heure pour la prochaine alerte.", 5, "Fab_Alerte",  4096 +16
+		message.Speak "Bien, annonce FabAlert : L'heure de l'alerte est passée. Veuillez entrer une nouvelle heure pour la prochaine alerte"
+        'MsgBox "L'heure de l'alerte est passée. Veuillez entrer une nouvelle heure pour la prochaine alerte.", vbOKOnly + vbInformation, "Fab_Alerte Alerte Terminée"
+		oShell.Popup "L'heure de l'alerte est passée. Veuillez entrer une nouvelle heure pour la prochaine alerte.", 5, "Fab_Alerte",  4096 +16
 		
 	Call Main ' Demander une nouvelle heure pour la prochaine alerte
 End Sub
@@ -117,11 +117,11 @@ Sub CustomSleep(seconds)
 End Sub
 
 Sub Sortir()
-				message.Speak "Bien, annonce FabAlert : Une autre instance du programme est dÃ©tectÃ©e. Ce programme va s'arrÃªter aprÃ¨s 10 secondes."
-              ' WScript.Echo "Une autre instance du programme est dÃ©tectÃ©e. Ce programme va s'arrÃªter aprÃ¨s 10 secondes."
-			    oShell.Popup "Une autre instance du programme est dÃ©tectÃ©e. Ce programme va s'arrÃªter aprÃ¨s 10 secondes.", 5, "Fab_Alerte Programme TerminÃ©",  4096 +16
+				message.Speak "Bien, annonce FabAlert : Une autre instance du programme est détectée. Ce programme va s'arrêter après 10 secondes."
+              ' WScript.Echo "Une autre instance du programme est détectée. Ce programme va s'arrêter après 10 secondes."
+			    oShell.Popup "Une autre instance du programme est détectée. Ce programme va s'arrêter après 10 secondes.", 5, "Fab_Alerte Programme Terminé",  4096 +16
                 
-				WScript.Sleep(10000)  ' Attendre 10 secondes avec vÃ©rification
+				WScript.Sleep(10000)  ' Attendre 10 secondes avec vérification
                 WScript.Quit
  
 End Sub
